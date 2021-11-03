@@ -43,19 +43,15 @@ serverless remove
 ```
 export SLS_ENDPOINT=https://m56ha23xqf.execute-api.ap-northeast-1.amazonaws.com/dev
 
-# get all hello/<username> list
-curl ${SLS_ENDPOINT}/hello/<username>
-> [ ]
-
-# get a hello/<username>
+# get a hello/test
 curl ${SLS_ENDPOINT}/hello/<username>
 > {"error":"Not found"}
 
-# PUT a hello/<username>
+# PUT a hello/test
 curl ${SLS_ENDPOINT}/hello/test -X POST -H "Content-Type: application/json" -d '{"date_of_birth": "1988-01-02"}'
 > {"username":"test","date_of_birth":"1988-01-02"}
 
-# get a hello/<username> again
+# get a hello/test again
 curl ${SLS_ENDPOINT}/hello/<username>
 > {"username":"test","date_of_birth":"1988-01-02"}
 
