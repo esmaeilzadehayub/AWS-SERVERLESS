@@ -6,11 +6,9 @@ Simple fully managed API server using API Gateway, Lambda, DynamoDB, and Flask. 
 ![image](https://user-images.githubusercontent.com/28998255/140040033-95cb6542-392e-4352-aa6d-1f37f4cadb33.png)
 
 # Deployment Details
-The app I am using an example is a simple Flask app with a single API endpoint. Invoking the endpoint will fetch data from DynamoDB and respond back to client with the user data. Below will describe what are the services involved in the deployment and how we will be deploying.
+The Flask app with a single API endpoint. Invoking the endpoint will fetch data from DynamoDB and respond back to client with the user data. Below will describe what are the services involved in the deployment and how we will be deploying.
 
 
-AWS lambda is a service that lets the user to run code without provisioning or managing servers and the user needs to pay for how much they use. The user can also scale it up and down according to their needs. Terraform is a tool for building, changing, and versioning infrastructure safely and efficiently. It uses Infrastructure as Code to provision and manage any cloud, infrastructure, or service.
-AWS API gateway is a fully managed service that makes it easy for developers to create, publish, maintain, monitor and secure APIs. API acts as a front door for the application to access data, business logic or functionality from the backend services. It handles all the task involved in accepting and processing up of hundreds or thousands of concurrent API calls, including traffic management, authorization, access control, monitoring and API management.
 
 . Flask API Lambda function
 ```yml
@@ -63,25 +61,25 @@ iamRoleStatements:
   ```
 
 # Getting Started
-To get started, you'll need the Serverless Framework installed. 
-You'll also need your environment configured with AWS credentials.
+To get started, you need the Serverless Framework installed. 
+You need your environment configured with AWS credentials.
 Getting Started
-To get started, you'll need the Serverless Framework installed. You'll also need your environment configured with AWS credentials.
+To get started, you need the Serverless Framework installed. You need your environment configured with AWS credentials.
 
 Creating and deploying a single endpoint
 Let's start by deploying a single endpoint.
 
-# First, create a new directory with a package.json file:
+# Create a new directory with a package.json file:
 ```
 $ mkdir my-flask-application && cd my-flask-application
 $ npm init -f
 Copy
-Then, install a few dependencies. We're going to use the serverless-wsgi plugin for negotiating the API Gateway event type into the WSGI format that Flask expects. We'll also use the serverless-python-requirements plugin for handling our Python packages on deployment.
+Then, install a few dependencies. We're going to use the serverless-wsgi plugin for negotiating the API Gateway event type into the WSGI format that Flask expects. We use the serverless-python-requirements plugin for handling our Python packages on deployment.
 
 $ npm install --save-dev serverless-wsgi serverless-python-requirements
 Copy
 ```
-With our libraries installed, let's write our Flask application. Create a file app.py with the following contents:
+With our libraries installed, let's write our Flask application. Create a file main.py with the following contents:
 
 main.py
 
