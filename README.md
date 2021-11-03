@@ -2,10 +2,11 @@
 
 Simple fully managed API server using API Gateway, Lambda, DynamoDB, and Flask. And deploy the infrastructure by [serverless framework](https://serverless.com/).
 # Deploy Lambda Function and API Gateway using
-![image](https://user-images.githubusercontent.com/28998255/140037469-e3a03868-25a6-4c93-adbf-6d8db8fc64f0.png)
+![image](https://user-images.githubusercontent.com/28998255/140038981-535b348f-3b43-48f9-ae9f-a342085cd87b.png)
 
-# AWS lambda is a service that lets the user to run code without provisioning or managing servers and the user needs to pay for how much they use. The user can also scale it up and down according to their needs. Terraform is a tool for building, changing, and versioning infrastructure safely and efficiently. It uses Infrastructure as Code to provision and manage any cloud, infrastructure, or service.
-# AWS API gateway is a fully managed service that makes it easy for developers to create, publish, maintain, monitor and secure APIs. API acts as a front door for the application to access data, business logic or functionality from the backend services. It handles all the task involved in accepting and processing up of hundreds or thousands of concurrent API calls, including traffic management, authorization, access control, monitoring and API management.
+
+AWS lambda is a service that lets the user to run code without provisioning or managing servers and the user needs to pay for how much they use. The user can also scale it up and down according to their needs. Terraform is a tool for building, changing, and versioning infrastructure safely and efficiently. It uses Infrastructure as Code to provision and manage any cloud, infrastructure, or service.
+AWS API gateway is a fully managed service that makes it easy for developers to create, publish, maintain, monitor and secure APIs. API acts as a front door for the application to access data, business logic or functionality from the backend services. It handles all the task involved in accepting and processing up of hundreds or thousands of concurrent API calls, including traffic management, authorization, access control, monitoring and API management.
 
 
 # In this walk-through, we will:
