@@ -4,15 +4,9 @@ import boto3
 from datetime import date
 
 app = Flask(__name__)
-
-
 TODOS_TABLE = os.environ['TODOS_TABLE']
-
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table(TODOS_TABLE)
-
-
-
 
 def get_todo(username):
     res = table.get_item(Key={ 'username': username })
@@ -20,13 +14,10 @@ def get_todo(username):
     today = date.today()
     if today.month == int(month) and today.day == int(day):
        return jsonify({"message": f"Hello, {username}! Happy birthday!"})
-
     else:
         month_diff = today.month - int(month)
         day_diff = today.day - int(day)
         return jsonify({"message": f"Hello, {username}! Your birthday is in {(12 + month_diff) * 30 + day_diff} day(s)"})
-
-
 
 def new_id():
     res = table.scan()
@@ -37,13 +28,10 @@ def new_id():
         ary = sorted(ary, key=lambda x: x['username'], reverse=True)
         return str(int(ary[0]['username']) + 1)
 
-
-
 @app.route("/hello/<username>")
 def show(username):
     todo = get_todo(username)
     return jsonify(todo),
-
 
 @app.route("/hello/<username>", methods=["POST"])
 def update(username):
@@ -54,7 +42,6 @@ def update(username):
     res = table.put_item(Item=new_todo)
 
      return jsonify(new_todo), 201
-
 
 @app.errorhandler(404)
 def not_found(error):
