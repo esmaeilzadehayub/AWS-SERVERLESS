@@ -8,8 +8,6 @@ Simple fully managed API server using API Gateway, Lambda, DynamoDB, and Flask. 
 # Deployment Details
 The Flask app with a single API endpoint. Invoking the endpoint will fetch data from DynamoDB and respond back to client with the user data. Below will describe what are the services involved in the deployment and how we will be deploying.
 
-
-
 . Flask API Lambda function
 ```yml
 provider:
@@ -69,7 +67,7 @@ To get started, you need the Serverless Framework installed. You need your envir
 Creating and deploying a single endpoint
 Let's start by deploying a single endpoint.
 
-# Create a new directory with a package.json file:
+# Create a new directory with a package.json file
 ```
 $ mkdir my-flask-application && cd my-flask-application
 $ npm init -f
@@ -90,15 +88,9 @@ import boto3
 from datetime import date
 
 app = Flask(__name__)
-
-
 TODOS_TABLE = os.environ['TODOS_TABLE']
-
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table(TODOS_TABLE)
-
-
-
 
 def get_todo(username):
     res = table.get_item(Key={ 'username': username })
@@ -111,8 +103,6 @@ def get_todo(username):
         month_diff = today.month - int(month)
         day_diff = today.day - int(day)
         return jsonify({"message": f"Hello, {username}! Your birthday is in {(12 + month_diff) * 30 + day_diff} day(s)"})
-
-
 
 def new_id():
     res = table.scan()
