@@ -85,7 +85,7 @@ With our libraries installed, let's write our Flask application. Create a file a
 
 main.py
 
-```
+```yml
 import os
 from flask import Flask, request, jsonify, abort
 import boto3
@@ -154,7 +154,7 @@ if __name__ == '__main__':
 To get this application deployed, create a serverless.yml in the working directory:
 
 
-```
+```yml
 # serverless.yml
 
 service: serverless-flask-sample
@@ -234,7 +234,7 @@ serverless remove
 
 ## Samples
 
-```
+```bash
 export SLS_ENDPOINT=https://m56ha23xqf.execute-api.ap-northeast-1.amazonaws.com/dev
 
 # get a hello/test
