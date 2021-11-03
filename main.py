@@ -45,7 +45,7 @@ def show(username):
     return jsonify(todo),
 
 
-@app.route("/hello/<username>", methods=["PUT"])
+@app.route("/hello/<username>", methods=["POST"])
 def update(username):
     date_of_birth = request.json.get('date_of_birth')
     if not date_of_birth:
