@@ -25,7 +25,7 @@ Simple fully managed API server using API Gateway, Lambda, DynamoDB and Flask. A
 
 ```
 # Download source
-git clone git@github.com:nipe0324/serverless-flask-sample.git
+git clone git@github.com:esmaeilzadehayub/AWS-SERVERLESS.git
 cd serverless-flask-sample
 
 # Install serverless globally
@@ -43,35 +43,21 @@ serverless remove
 ```
 export SLS_ENDPOINT=https://m56ha23xqf.execute-api.ap-northeast-1.amazonaws.com/dev
 
-# get all todo list
-curl ${SLS_ENDPOINT}/todos
+# get all hello/<username> list
+curl ${SLS_ENDPOINT}/hello/<username>
 > [ ]
 
-# get a todo
-curl ${SLS_ENDPOINT}/todos/1
+# get a hello/<username>
+curl ${SLS_ENDPOINT}/hello/<username>
 > {"error":"Not found"}
 
-# create a todo
-curl ${SLS_ENDPOINT}/todos -X POST -H "Content-Type: application/json" -d '{"title": "Shopping"}'
-> {"id":"1","title":"Shopping"}
+# PUT a hello/<username>
+curl ${SLS_ENDPOINT}/hello/test -X POST -H "Content-Type: application/json" -d '{"date_of_birth": "1988-01-02"}'
+> {"username":"test","date_of_birth":"1988-01-02"}
 
-# get a todo again
-curl ${SLS_ENDPOINT}/todos/1
-> {"id":"1","title":"Shopping"}
+# get a hello/<username> again
+curl ${SLS_ENDPOINT}/hello/<username>
+> {"username":"test","date_of_birth":"1988-01-02"}
 
-# update a todo
-curl ${SLS_ENDPOINT}/todos/1 -X PUT -H "Content-Type: application/json" -d '{"title": "Shopping 2"}'
-> {"id":"1","title":"Shopping 2"}
 
-# get all todo list
-curl ${SLS_ENDPOINT}/todos
-> [{"id":"1","title":"Shopping 2"}]
-
-# remove a todo
-curl ${SLS_ENDPOINT}/todos/1 -X DELETE -H "Content-Type: application/json"
-> {"success":true}
-
-# get all todo list
-curl ${SLS_ENDPOINT}/todos
-> [ ]
 ```
