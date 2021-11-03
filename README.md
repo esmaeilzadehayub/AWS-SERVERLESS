@@ -13,7 +13,54 @@ AWS lambda is a service that lets the user to run code without provisioning or m
 AWS API gateway is a fully managed service that makes it easy for developers to create, publish, maintain, monitor and secure APIs. API acts as a front door for the application to access data, business logic or functionality from the backend services. It handles all the task involved in accepting and processing up of hundreds or thousands of concurrent API calls, including traffic management, authorization, access control, monitoring and API management.
 
 . Flask API Lambda function
+```yml
+provider:
+name: aws
+runtime: python3.6
+stage: dev
+region: us-east-1
+memorySize: 128
+profile: flaskprofile
+```
 
+. Dynamo DB
+```yml
+resources:
+  Resources:
+    TodosDynamoDBTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        TableName: ${self:custom.tableName}
+        AttributeDefinitions:
+          -
+            AttributeName:  username
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: username
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+```
+. IAM Role
+```yml
+
+iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - { "Fn::GetAtt": ["TodosDynamoDBTable", "Arn" ] }
+  environment:
+    TODOS_TABLE: ${self:custom.tableName}
+  ```
 
 # Getting Started
 To get started, you'll need the Serverless Framework installed. 
@@ -107,17 +154,6 @@ if __name__ == '__main__':
 To get this application deployed, create a serverless.yml in the working directory:
 
 
-# Adding a DynamoDB table with REST-like endpoints
-Doing a "Hello World!" is fun, but your application will need to persist some sort of state to be useful. Let's add a DynamoDB table.
- We want to store them by username, which is a unique identifier for a particular user.
-
-First, we'll need to configure our serverless.yml to provision the table. This involves three parts:
-
-
-Provisioning the table in the resources section;
-Adding the proper IAM permissions; and Passing the table name as an environment variable so our functions can use it.
-Change your serverless.yml to look as follows:
-
 ```
 # serverless.yml
 
@@ -180,27 +216,6 @@ resources:
 ```
 
 The handler is handler function from the wsgi module. Note that this module will be added to our deployment package by the serverless-wsgi plugin 
-
-# Tools & Packages
-
-* [Amazon API Gateway](https://aws.amazon.com/api-gateway/)
-* [AWS Lambda](https://aws.amazon.com/lambda/)
-* [Amazon DynamoDB](https://aws.amazon.com/dynamodb/)
-* [serverless](https://serverless.com/) 1.27.3 (npm package)
-* [serverless-wsgi](https://github.com/logandk/serverless-wsgi) 1.4.8
-* [serverless-python-requirements](https://github.com/UnitedIncome/serverless-python-requirements) 4.1.0
-* [Flask](http://flask.pocoo.org/) 1.0.2 (API server)
-* Python 3.6.1 (by pyenv)
-* aws-cli 1.15.45 (by pyenv)
-* node v10.5.0 (by ndenv)
-
-## Prerequisite
-
-* node.js (npm) greater than or equal to v4
-* aws account
-* awscli
-
-## Setup & Deploy
 
 ```
 # Download source
